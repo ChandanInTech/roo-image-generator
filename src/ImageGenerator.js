@@ -6,6 +6,7 @@ const ImageGenerator = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [style, setStyle] = useState('Weird (Default)');
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -30,6 +31,7 @@ const ImageGenerator = () => {
 
       try {
         console.log('generateImage function called');
+        const prompt = style === 'Weird (Default)' ? 'make the uploaded image funny art' : `${style} style funny art`;
         const response = await axios.post(
           'https://openrouter.ai/api/v1/chat/completions',
           {
@@ -38,7 +40,7 @@ const ImageGenerator = () => {
               {
                 role: 'user',
                 content: [
-                  { type: 'text', text: 'make the uploaded image funny art' },
+                  { type: 'text', text: prompt },
                   {
                     type: 'image_url',
                     image_url: {
@@ -77,10 +79,22 @@ const ImageGenerator = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <div style={{ background: 'linear-gradient(to right, #ff7e5f, #feb47b)', padding: '20px', textAlign: 'center' }}>
-        <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
+      <div style={{ textAlign: 'center' }}>
+        <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple', marginTop: '0px' }}>
           Behold! The Weird Kangaroo Generator!
         </h1>
+        <select
+          value={style}
+          onChange={(e) => setStyle(e.target.value)}
+          style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', margin: '10px', padding: '5px' }}
+        >
+          <option value="Funny (Default)">Funny (Default)</option>
+          <option value="Cartoon Funky">Cartoon Funky</option>
+          <option value="Neon Glow">Neon Glow</option>
+          <option value="Vintage Retro">Vintage Retro</option>
+          <option value="Minimalist">Minimalist</option>
+          <option value="Add A Mustache">Add A Mustache</option>
+        </select>
         <input type="file" onChange={handleImageChange} />
         <button onClick={generateImage} disabled={loading}>
           Summon a Weird Kangaroo!
