@@ -146,7 +146,13 @@ const ImageGenerator = () => {
         </div>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', overflow: 'hidden' }}>
-        {loading && <div className="loading-indicator"></div>}
+        {loading && (
+          <div className="loading-container">
+            {Array.from({ length: 25 }, (_, i) => (
+              <div key={i} className="bubble"></div>
+            ))}
+          </div>
+        )}
         {!imageUrl && !loading && !errorMessage && <p>Awaiting the majestic weirdness...</p>}
         {errorMessage && !loading && (
           <p style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
