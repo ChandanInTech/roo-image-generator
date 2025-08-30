@@ -79,26 +79,71 @@ const ImageGenerator = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <div style={{ textAlign: 'center', padding: '0px' }}>
+      <div style={{ textAlign: 'center', padding: '0px', marginTop: '0px' }}>
         <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple', marginTop: '0px' }}>
           Behold! The Weird Kangaroo Generator!
         </h1>
-        <select
-          value={style}
-          onChange={(e) => setStyle(e.target.value)}
-          style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', margin: '10px', padding: '5px' }}
-        >
-          <option value="Funny (Default)">Funny (Default)</option>
-          <option value="Cartoon Funky">Cartoon Funky</option>
-          <option value="Neon Glow">Neon Glow</option>
-          <option value="Vintage Retro">Vintage Retro</option>
-          <option value="Minimalist">Minimalist</option>
-          <option value="Add A Mustache">Add A Mustache</option>
-        </select>
-        <input type="file" onChange={handleImageChange} />
-        <button onClick={generateImage} disabled={loading}>
-          Summon a Weird Kangaroo!
-        </button>
+        <div style={{ marginTop: '-20px' }}>
+          <select
+            value={style}
+            onChange={(e) => setStyle(e.target.value)}
+            style={{
+              fontFamily: 'Comic Sans MS, cursive, sans-serif',
+              fontSize: '18px',
+              backgroundColor: '#90EE90',
+              color: '#8B0000',
+              padding: '10px',
+              border: '3px dashed #FF69B4',
+              borderRadius: '15px',
+              margin: '10px',
+              boxShadow: '0 5px 10px rgba(0,0,0,0.2)',
+              cursor: 'pointer'
+            }}
+          >
+            <option value="Funny (Default)">🎈 Funny (Default)</option>
+            <option value="Cartoon Funky">🎭 Cartoon Funky</option>
+            <option value="Neon Glow">💡 Neon Glow</option>
+            <option value="Vintage Retro">📸 Vintage Retro</option>
+            <option value="Minimalist">🖼️ Minimalist</option>
+            <option value="Add A Mustache">🧔 Add A Mustache</option>
+          </select>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            style={{
+              fontFamily: 'Comic Sans MS, cursive, sans-serif',
+              fontSize: '16px',
+              backgroundColor: '#FFFFE0',
+              color: '#8B008B',
+              padding: '8px',
+              border: '3px solid #FFD700',
+              borderRadius: '10px',
+              margin: '10px',
+              cursor: 'pointer'
+            }}
+          />
+          <button
+            onClick={generateImage}
+            disabled={loading}
+            style={{
+              fontSize: '30px',
+              fontFamily: 'Comic Sans MS, cursive, sans-serif',
+              backgroundColor: '#FFD700',
+              color: 'black',
+              padding: '20px 40px',
+              border: '4px dotted magenta',
+              borderRadius: '40px',
+              cursor: 'pointer',
+              boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
+              textShadow: '2px 2px 5px rgba(255,255,255,0.5)',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          >
+            🎉 Create 🐾
+          </button>
+        </div>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', overflow: 'hidden' }}>
         {loading && <div className="loading-indicator"></div>}
