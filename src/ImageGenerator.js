@@ -15,7 +15,7 @@ const ImageGenerator = () => {
         {
           model: 'google/gemini-2.5-flash-image-preview:free',
           messages: [
-            { role: 'user', content: 'Generate a weird image of a kangaroo' }
+            { role: 'user', content: 'Generate a funny image of a cartoon kangaroo' }
           ]
         },
         {
@@ -42,7 +42,7 @@ const ImageGenerator = () => {
       <button onClick={generateImage} disabled={loading}>
         Generate Image
       </button>
-      {loading && <div>Loading...</div>}
+      {loading && <div className="loading-indicator"></div>}
       {imageUrl && !loading && <img src={imageUrl} alt="Generated" />}
     </div>
   );
