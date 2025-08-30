@@ -1,5 +1,12 @@
 body {
   background: linear-gradient(to right, #FF6B6B, #4ECDC4);
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
 }
 .App {
   text-align: center;

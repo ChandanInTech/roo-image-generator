@@ -78,8 +78,8 @@ const ImageGenerator = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <div style={{ textAlign: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <div style={{ textAlign: 'center', padding: '0px' }}>
         <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple', marginTop: '0px' }}>
           Behold! The Weird Kangaroo Generator!
         </h1>
@@ -100,7 +100,7 @@ const ImageGenerator = () => {
           Summon a Weird Kangaroo!
         </button>
       </div>
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', overflow: 'hidden' }}>
         {loading && <div className="loading-indicator"></div>}
         {!imageUrl && !loading && !errorMessage && <p>Awaiting the majestic weirdness...</p>}
         {errorMessage && !loading && (
@@ -108,7 +108,7 @@ const ImageGenerator = () => {
             {errorMessage}
           </p>
         )}
-        {imageUrl && !loading && <img src={imageUrl} alt="Generated" style={{ maxWidth: '100%', maxHeight: '100%' }} />}
+        {imageUrl && !loading && <img src={imageUrl} alt="Generated" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />}
       </div>
     </div>
   );
