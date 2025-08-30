@@ -76,22 +76,26 @@ const ImageGenerator = () => {
   };
 
   return (
-    <div>
-      <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
-        Behold! The Weird Kangaroo Generator!
-      </h1>
-      <input type="file" onChange={handleImageChange} />
-      <button onClick={generateImage} disabled={loading}>
-        Summon a Weird Kangaroo!
-      </button>
-      {loading && <div className="loading-indicator"></div>}
-      {!imageUrl && !loading && !errorMessage && <p>Awaiting the majestic weirdness...</p>}
-      {errorMessage && !loading && (
-        <p style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
-          {errorMessage}
-        </p>
-      )}
-      {imageUrl && !loading && <img src={imageUrl} alt="Generated" />}
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ background: 'linear-gradient(to right, #ff7e5f, #feb47b)', padding: '20px', textAlign: 'center' }}>
+        <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
+          Behold! The Weird Kangaroo Generator!
+        </h1>
+        <input type="file" onChange={handleImageChange} />
+        <button onClick={generateImage} disabled={loading}>
+          Summon a Weird Kangaroo!
+        </button>
+      </div>
+      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+        {loading && <div className="loading-indicator"></div>}
+        {!imageUrl && !loading && !errorMessage && <p>Awaiting the majestic weirdness...</p>}
+        {errorMessage && !loading && (
+          <p style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
+            {errorMessage}
+          </p>
+        )}
+        {imageUrl && !loading && <img src={imageUrl} alt="Generated" style={{ maxWidth: '100%', maxHeight: '100%' }} />}
+      </div>
     </div>
   );
 };
