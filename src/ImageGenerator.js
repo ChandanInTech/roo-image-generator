@@ -4,6 +4,7 @@ import axios from 'axios';
 const ImageGenerator = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = (e) => {
@@ -20,6 +21,7 @@ const ImageGenerator = () => {
 
     setLoading(true);
     setImageUrl('');
+    setErrorMessage('');
 
     const reader = new FileReader();
     reader.readAsDataURL(selectedImage);
@@ -58,7 +60,9 @@ const ImageGenerator = () => {
         setImageUrl(imageUrl);
       } catch (error) {
         console.error('Error generating image:', error);
-        if (error.response) {
+        if (error.response && error.response.data && error.response.data.choices && error.response.data.choices[0].finish_reason === 'content_filter') {
+          setErrorMessage('Oops! The kangaroo was too weird for filters! Try again for more kangaroo chaos.');
+        } else if (error.response) {
           console.error('Error response:', error.response);
         }
       } finally {
@@ -73,11 +77,20 @@ const ImageGenerator = () => {
 
   return (
     <div>
+      <h1 style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
+        Behold! The Weird Kangaroo Generator!
+      </h1>
       <input type="file" onChange={handleImageChange} />
       <button onClick={generateImage} disabled={loading}>
-        Generate Image
+        Summon a Weird Kangaroo!
       </button>
       {loading && <div className="loading-indicator"></div>}
+      {!imageUrl && !loading && !errorMessage && <p>Awaiting the majestic weirdness...</p>}
+      {errorMessage && !loading && (
+        <p style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif', color: 'purple' }}>
+          {errorMessage}
+        </p>
+      )}
       {imageUrl && !loading && <img src={imageUrl} alt="Generated" />}
     </div>
   );
